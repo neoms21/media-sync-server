@@ -1,0 +1,7 @@
+logs/*
+!.gitkeep
+node_modules/
+.DS_Store
+.idea
+secret.json
+client/bower_components
