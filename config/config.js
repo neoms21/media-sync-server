@@ -1,4 +1,4 @@
-var uploadDir = '/Users/mseth9/Movies/';
+var uploadDir = '/Users/mseth9/Movies';
 
 
 module.exports = {
