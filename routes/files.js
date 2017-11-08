@@ -23,10 +23,10 @@ router.post('/arrange', function (req, res, next) {
 
         source.pipe(dest);
         source.on('end', function (x) {
-            
+
             if (++counter === numberOfFiles) {
                 res.json('success');
-                deleteFiles();
+                deleteFiles(uploadDir);
             }
         });
         source.on('error', function (err) { /* error */
@@ -37,16 +37,16 @@ router.post('/arrange', function (req, res, next) {
     console.log(err);
 });
 
-var deleteFiles = function () {
-  fs.readdir(uploadDir, (err, files) => {
-  if (err) throw err;
+var deleteFiles = function(dirPath) {
+    try { var files = fs.readdirSync(dirPath); }
+    catch(e) { return; }
+    if (files.length > 0)
+        for (var i = 0; i < files.length; i++) {
+            var filePath = dirPath + '/' + files[i];
+            if (fs.statSync(filePath).isFile())
+                fs.unlinkSync(filePath);
 
-  for (const file of files) {
-    fs.unlink(path.join(uploadDir, file), err => {
-      if (err) throw err;
-    });
-  }
-});
+        }
 };
 
 

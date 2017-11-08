@@ -17,7 +17,6 @@ var storage = multer.diskStorage({ //multers disk storage settings
 });
 
 router.post('/save', function (req, res, next) {
-    console.log(req.body);
     upload(req, res, function (err) {
         if (err) {
             console.log(err);
@@ -26,17 +25,6 @@ router.post('/save', function (req, res, next) {
         }
         res.json({error_code: 0, err_desc: null});
     });
-    // console.log(req);
-    // res.send('post successful');
-    // user.save(function (err, result) {
-    //     if (err) {
-    //         res.status(400);
-    //         res.send('Error saving the user ' + err);
-    //     }
-    //     else
-    //         res.json({"userId": result._id});
-    // })
-
 });
 
 var upload = multer({
