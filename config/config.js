@@ -1,5 +1,5 @@
 var os = require('os');
-var uploadDir = os.platform() !== 'darwin' ? 'Z:' : '/Users/mseth9/Movies';
+var uploadDir = os.platform() !== 'darwin' ? 'Y:' : '/Users/msethi/Pictures';
 module.exports = {
     uploadDir: uploadDir
 };
