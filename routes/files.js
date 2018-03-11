@@ -6,9 +6,8 @@ var path = require('path');
 var _ = require('lodash');
 
 var uploadDir = config.uploadDir;
-router.post('/arrange', function (req, res, next) {
 
-
+var moveFiles = function (req, res) {
     var dir = uploadDir + '/' + req.body.folder;
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
@@ -32,14 +31,22 @@ router.post('/arrange', function (req, res, next) {
         source.on('error', function (err) { /* error */
         });
     });
-
+};
+router.post('/arrange', function (req, res, next) {
+    setTimeout(function () {
+        moveFiles(req, res)
+    }, 10000);
 }, function (err) {
     console.log(err);
 });
 
-var deleteFiles = function(dirPath) {
-    try { var files = fs.readdirSync(dirPath); }
-    catch(e) { return; }
+var deleteFiles = function (dirPath) {
+    try {
+        var files = fs.readdirSync(dirPath);
+    }
+    catch (e) {
+        return;
+    }
     if (files.length > 0)
         for (var i = 0; i < files.length; i++) {
             var filePath = dirPath + '/' + files[i];
